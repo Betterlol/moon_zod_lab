@@ -1,0 +1,7 @@
+import {
+  "moonbitlang/core/json",
+  "moonbitlang/core/env",
+  "Betterlol/moon_zod",
+}
+
+pkgtype(kind: "executable")

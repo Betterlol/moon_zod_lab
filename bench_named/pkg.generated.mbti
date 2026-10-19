@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Betterlol/moon_zod_lab/bench_named"
+
+import {
+  "Betterlol/moon_zod/core",
+}
+
+// Values
+pub fn build(String, Int) -> Graph
+
+pub fn dependencies(String, Int) -> Array[Int]
+
+pub fn verify_order(Graph, Array[@core.Schema]) -> Bool
+
+// Errors
+
+// Types and methods
+pub(all) struct Graph {
+  root : @core.Schema
+  nodes : Array[@core.Schema]
+  names : Array[String]
+  edges : Array[Array[Int]]
+}
+
+// Type aliases
+
+// Traits

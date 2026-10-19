@@ -1,0 +1,23 @@
+{
+  "name": "moon-zod-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Independent exporter validation and reproducible benchmarks for moon_zod",
+  "license": "Apache-2.0",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node scripts/test-exporters.cjs",
+    "test:moon": "moon test --target js",
+    "test:harness": "node --test scripts/lib/*.test.cjs bench_cross_lang/*.test.cjs",
+    "fixtures:sync": "node scripts/sync-fixtures.cjs",
+    "bench:validation": "node bench_cross_lang/bench.js",
+    "bench:validation:smoke": "node bench_cross_lang/bench.js --smoke",
+    "bench:named": "node scripts/bench-named.cjs",
+    "bench:named:smoke": "node scripts/bench-named.cjs --smoke"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "zod": "4.6.7"
+  }
+}

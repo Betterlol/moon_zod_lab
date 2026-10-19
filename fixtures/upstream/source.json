@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/json-schema-org/JSON-Schema-Test-Suite",
+  "commit": "55719286c33ae0d1823bfb65fea10338a19bc37c",
+  "draft": "draft2020-12",
+  "files": ["type.json", "enum.json", "const.json", "minLength.json", "minimum.json", "prefixItems.json", "ref.json", "unevaluatedProperties.json"],
+  "license": "MIT",
+  "note": "Selected upstream files, not the full conformance suite. Only explicitly mapped groups are exercised through direct MoonZod factory adapters."
+}

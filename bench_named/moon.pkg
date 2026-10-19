@@ -1,0 +1,7 @@
+import {
+  "Betterlol/moon_zod/core",
+}
+
+import {
+  "Betterlol/moon_zod/exporters",
+} for "test"

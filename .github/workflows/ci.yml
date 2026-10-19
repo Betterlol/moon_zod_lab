@@ -1,0 +1,47 @@
+name: MoonZod Lab
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: hustcer/setup-moonbit@v1
+      - name: Install dependencies
+        run: |
+          npm ci
+          python -m venv .venv
+          .venv/bin/python -m pip install -r requirements-lock.txt
+          moon update
+          moon build --target js --release
+      - name: Functional verification
+        run: |
+          npm run test:harness
+          moon fmt --check cmd/export-fixtures cmd/validation cmd/named bench_named
+          npm run test:moon
+          npm test
+      - name: Benchmark smoke
+        run: |
+          npm run bench:validation:smoke
+          npm run bench:named:smoke
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: moon-zod-lab-reports
+          path: reports/*.json
+          if-no-files-found: warn

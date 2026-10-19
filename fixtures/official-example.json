@@ -1,0 +1,38 @@
+{
+  "id": "official-complex-object",
+  "provenance": {
+    "url": "https://json-schema.org/learn/miscellaneous-examples#complex-object-with-nested-properties",
+    "retrieved": "2026-10-14",
+    "title": "Complex object with nested properties",
+    "scope": "Direct factories reproduce this example's properties, required fields, passthrough objects and constraints. MoonZod optional additionally accepts null; samples here exercise absent or correctly typed optional fields. This is a representative example, not full equivalence."
+  },
+  "referenceSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "name": { "type": "string" },
+      "age": { "type": "integer", "minimum": 0 },
+      "address": {
+        "type": "object",
+        "properties": {
+          "street": { "type": "string" },
+          "city": { "type": "string" },
+          "state": { "type": "string" },
+          "postalCode": { "type": "string", "pattern": "\\d{5}" }
+        },
+        "required": ["street", "city", "state", "postalCode"]
+      },
+      "hobbies": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["name", "age"]
+  },
+  "samples": [
+    { "data": { "name": "John Doe", "age": 25, "address": { "street": "123 Main St", "city": "New York", "state": "NY", "postalCode": "10001" }, "hobbies": ["reading", "running"] }, "valid": true },
+    { "data": { "name": "Ada", "age": 0 }, "valid": true },
+    { "data": { "name": "Ada", "age": -1 }, "valid": false, "differences": { "skeleton": { "actual": true, "reason": "Skeleton intentionally omits the age minimum annotation." } } },
+    { "data": { "name": "Ada", "age": 1.5 }, "valid": false, "differences": { "skeleton": { "actual": true, "reason": "Skeleton intentionally omits the integer rule annotation." } } },
+    { "data": { "name": "Ada" }, "valid": false },
+    { "data": { "name": "Ada", "age": "0" }, "valid": false },
+    { "data": { "name": "Ada", "age": 0, "address": { "street": "s", "city": "c", "state": "x", "postalCode": "x" } }, "valid": false, "differences": { "skeleton": { "actual": true, "reason": "Skeleton intentionally omits the postal-code pattern annotation." } } }
+  ]
+}

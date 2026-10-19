@@ -1,0 +1,8 @@
+_build/
+target/
+.mooncakes/
+node_modules/
+.venv/
+__pycache__/
+reports/*
+!reports/.gitkeep

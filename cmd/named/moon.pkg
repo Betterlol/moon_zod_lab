@@ -1,0 +1,10 @@
+import {
+  "Betterlol/moon_zod_lab/bench_named",
+  "Betterlol/moon_zod/core",
+  "Betterlol/moon_zod/exporters",
+  "moonbitlang/core/bench",
+  "moonbitlang/core/env",
+  "moonbitlang/core/json",
+}
+
+pkgtype(kind: "executable")

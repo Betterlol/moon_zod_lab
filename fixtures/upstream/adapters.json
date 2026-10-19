@@ -1,0 +1,46 @@
+{
+  "type.json": {
+    "0": "integer type matches integers",
+    "1": "number type matches numbers",
+    "2": "string type matches strings",
+    "3": "object type matches objects",
+    "4": "array type matches arrays",
+    "5": "boolean type matches booleans",
+    "6": "null type matches only the null object",
+    "7": "multiple types can be specified in an array",
+    "8": "type as array with one item",
+    "9": "type: array or object",
+    "10": "type: array, object or null"
+  },
+  "enum.json": {
+    "0": "simple enum validation",
+    "4": "enum with escaped characters",
+    "5": "enum with false does not match 0",
+    "7": "enum with true does not match 1",
+    "9": "enum with 0 does not match false",
+    "11": "enum with 1 does not match true",
+    "15": "characters with the same visual representation, but different number of codepoints"
+  },
+  "const.json": {
+    "0": "const validation",
+    "1": "const with object",
+    "2": "const with array",
+    "3": "const with null",
+    "4": "const with false does not match 0",
+    "5": "const with true does not match 1",
+    "6": "const with [false] does not match [0]",
+    "7": "const with [true] does not match [1]",
+    "8": "const with {\"a\": false} does not match {\"a\": 0}",
+    "9": "const with {\"a\": true} does not match {\"a\": 1}",
+    "10": "const with 0 does not match other zero-like types",
+    "11": "const with 1 does not match true",
+    "12": "const with -2.0 matches integer and float types"
+  },
+  "minLength.json": {
+    "0": "minLength validation",
+    "1": "minLength validation with a decimal"
+  },
+  "minimum.json": {
+    "1": "minimum validation with signed integer"
+  }
+}

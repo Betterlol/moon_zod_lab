@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# Keep pinned upstream fixture bytes intact, including original trailing spaces.
+fixtures/upstream/draft2020-12/*.json -whitespace
