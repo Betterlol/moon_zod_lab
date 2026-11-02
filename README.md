@@ -102,3 +102,46 @@ GitHub CI 根据 `moon.mod` 下载发布依赖，运行功能测试和基准 smo
 - [Ajv 规范版本](https://ajv.js.org/json-schema.html)
 - [Zod JSON Schema 导出](https://zod.dev/json-schema)
 - [Pydantic JSON Schema 导出](https://docs.pydantic.dev/latest/concepts/json_schema/)
+
+## MoonZod 0.10 migration checks (manual)
+
+The scripts below were moved from the MoonZod core PR. They are opt-in checks;
+neither repository's CI gains Python validation steps. Existing lab tests and
+benchmarks keep their published dependency and historical expectations.
+
+After 0.10.0 is published, select it with `moon add --upgrade Betterlol/moon_zod@0.10.0`
+and build the lab before running these checks. The current 0.9.0 pin does not
+provide the new APIs, so these commands fail explicitly against that version.
+Install the optional independent validator with `python -m pip install jsonschema==4.23.0`.
+
+```sh
+python scripts/check_generated_source.py
+python scripts/check_output_contracts.py
+python scripts/check_zod_compat.py --zod-path /path/to/zod
+```
+
+Before publication, select an explicit source checkout without changing the lab
+dependency, the installed package, or the checkout's files:
+
+```sh
+python scripts/check_generated_source.py --moon-zod-path /path/to/moon_zod
+python scripts/check_output_contracts.py --moon-zod-path /path/to/moon_zod
+python scripts/check_zod_compat.py --moon-zod-path /path/to/moon_zod --zod-path /path/to/zod
+```
+
+Generated producers and consumers run in isolated workspaces under ignored `tmp/`
+and are removed after the run. The source's Mooncakes dependencies must already
+be installed. Generated-source and output-contract checks cover Wasm GC and JS.
+The differential oracle requires the local Zod 4.6.7 source, retains intentional
+port differences, and fails on unknown mismatches. It requires Node's TypeScript
+transformation support; it never downloads another Zod installation.
+
+Unicode table generation/checking requires Node 24.15.0 with Unicode 17.0:
+
+```sh
+node scripts/generate_unicode_case.mjs --moon-zod-path /path/to/moon_zod --check
+node scripts/generate_unicode_case.mjs --moon-zod-path /path/to/moon_zod --verify
+```
+
+Omitting `--check`/`--verify` regenerates the table in the explicitly selected
+checkout. Generation never writes to the lab's default installed dependency.
